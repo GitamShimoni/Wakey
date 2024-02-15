@@ -1,8 +1,6 @@
-# React + Vite
+# Wakey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Wakey is a free web-app that helps users wake up before arriving at their public transportation destination.
+Wakey has an easy-to-use and intuitive design, friendly for all users, and free to use.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Our platform uses GPS and several government api's to achieve its goal - Making a phone call, and waking up its user, before arriving at the designated location.
