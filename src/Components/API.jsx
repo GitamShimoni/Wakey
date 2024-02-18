@@ -1,42 +1,57 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
-function API() {
-  const [data, setData] = useState([]);
-  const [stationId, setStationId] = useState(21256);
-  const [filteredData, setFilteredData] = useState([]);
-
+function API({landmark2} , {reqWakeUp}) {
   const [distance, setDistance] = useState(null);
-  const [landmark, setLandmark] = useState({
-    latitude: null,
-    longitude: null,
-  });
+  const [landmark, setLandmark] = useState(null);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setLandmark({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+    // Function to get user's current location
+    const getCurrentLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          setLandmark({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
         });
-      });
-    } else {
-      console.log("Geolocation is not available in your browser.");
-    }
+      } else {
+        console.log("Geolocation is not available in your browser.");
+      }
+    };
+
+    // Get current location initially
+    getCurrentLocation();
+
+    // Check location every minute
+    const interval = setInterval(() => {
+      getCurrentLocation();
+    }, 60000); // 60000 milliseconds = 1 minute
+
+    // Clean up interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (landmark!=null) {
-      distanceCalculator();
+    if (landmark) {
+      const landmark2 = {
+        latitude: 37.774929179760605, // Example latitude
+        longitude: -122.4194154846738, // Example longitude
+      };
+      distanceCalculator(landmark2);
     }
   }, [landmark]); // Trigger distance calculation whenever landmark changes
 
-  const distanceCalculator = () => {
-    const landmark2 = { latitude: 32.32894, longitude: 34.858547 };
+  //twilio call trigger:
+  useEffect(() => {
+    if (distance <= reqWakeUp) {    
+      //twilio call
+    }
+  }, [distance]); 
 
+  const distanceCalculator = (landmark2) => {
     const R = 6371; // Radius of the Earth in kilometers
-    const lat1 = toRadians(landmark?.latitude);
-    const lon1 = toRadians(landmark?.longitude);
+    const lat1 = toRadians(landmark.latitude);
+    const lon1 = toRadians(landmark.longitude);
     const lat2 = toRadians(landmark2.latitude);
     const lon2 = toRadians(landmark2.longitude);
 
@@ -58,8 +73,7 @@ function API() {
 
   return (
     <div className="App">
-      <h1>Bus Data</h1>
-      {/* {data.map(item => item)} */}
+      <h1>Distance Calculator</h1>
       <p>
         Distance:{" "}
         {distance !== null ? distance.toFixed(2) + " km" : "Calculating..."}
