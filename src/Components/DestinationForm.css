@@ -1,0 +1,19 @@
+#destination-form-container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#sendformbutton{
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgb(252, 216, 163);
+    padding: 2vw;
+    transition: 0.6s;
+}
+#sendformbutton:hover{
+    background-color: rgb(245, 176, 72);
+}
