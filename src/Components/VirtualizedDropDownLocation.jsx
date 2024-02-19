@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FixedSizeList } from "react-window";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import CircularProgress from "@mui/material/CircularProgress"; // Import CircularProgress
 import "./DropDownList.css";
 import axios from "axios";
+import Loader from "./Loader";
 
 const VirtualizedDropdownLocation = ({
   searchbarId,
@@ -17,25 +19,23 @@ const VirtualizedDropdownLocation = ({
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [loading, setLoading] = useState(false); // State for loading indicator
 
   useEffect(() => {
     // Filter options based on search term
     if (options) {
-      //   const filtered = options?.filter((option) =>
-      //     option[toSearch].toLowerCase().includes(searchTerm.toLowerCase())
-      //   );
       const filtered = options.slice(0, 10);
       setFilteredOptions(filtered);
-      //   setFilteredOptions(filtered);
     }
   }, [options]);
 
   async function sendFormFunction() {
+    setLoading(true); // Set loading to true when sending the request
     const data = await axios.get(
       `https://nominatim.openstreetmap.org/search?q=${searchTerm}&format=json&limit=4&addressdetails=1`
     );
-    console.log(data?.data);
     setOptions(data?.data);
+    setLoading(false); // Set loading to false when response received
   }
 
   useEffect(() => {
@@ -91,6 +91,7 @@ const VirtualizedDropdownLocation = ({
           </FixedSizeList>
         </ul>
       )}
+      {loading && <Loader/>}
     </div>
   );
 };
