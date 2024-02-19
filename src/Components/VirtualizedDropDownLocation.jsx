@@ -3,33 +3,47 @@ import { FixedSizeList } from "react-window";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./DropDownList.css";
+import axios from "axios";
 
-const VirtualizedDropdown = ({
+const VirtualizedDropdownLocation = ({
   searchbarId,
   searchbarName,
-  options,
   onSelect,
   placeholderValue,
   toSearch,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [options, setOptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     // Filter options based on search term
     if (options) {
-      const filtered = options?.filter((option) =>
-        option[toSearch].toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      // setFilteredOptions(filtered.slice(0, 20));
+      //   const filtered = options?.filter((option) =>
+      //     option[toSearch].toLowerCase().includes(searchTerm.toLowerCase())
+      //   );
+      const filtered = options.slice(0, 10);
       setFilteredOptions(filtered);
+      //   setFilteredOptions(filtered);
     }
-  }, [searchTerm, options]);
+  }, [options]);
+
+  async function sendFormFunction() {
+    const data = await axios.get(
+      `https://nominatim.openstreetmap.org/search?q=${searchTerm}&format=json&limit=4&addressdetails=1`
+    );
+    console.log(data?.data);
+    setOptions(data?.data);
+  }
+
+  useEffect(() => {
+    sendFormFunction();
+  }, [searchTerm]);
 
   const handleSelect = (option) => {
-    onSelect(option, searchbarName, searchbarId);
+    onSelect(option);
     setSelected(option[toSearch]);
     setIsOpen(false);
   };
@@ -70,7 +84,7 @@ const VirtualizedDropdown = ({
               >
                 <ListItemText
                   className="listItemInSearchbar"
-                  primary={filteredOptions[index][toSearch]}
+                  primary={filteredOptions[index][toSearch].slice(0, 20)}
                 />
               </li>
             )}
@@ -81,4 +95,4 @@ const VirtualizedDropdown = ({
   );
 };
 
-export default VirtualizedDropdown;
+export default VirtualizedDropdownLocation;

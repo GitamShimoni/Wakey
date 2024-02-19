@@ -6,6 +6,7 @@ import API from "./Components/API";
 import DestinationForm from "./Components/DestinationForm";
 import FrontPage from "./Components/FrontPage";
 import MainPage from "./Components/MainPage";
+import SearchLocation from "./Components/SearchLocation";
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <Route path="/apiCheck" element={<API />} />
         <Route path="/DestinationForm" element={<DestinationForm />} />
         <Route path="/FrontPage" element={<FrontPage />} />
-        <Route path="/home" element={<MainPage />}/>
-
+        <Route path="/home" element={<MainPage />} />
+        <Route path="/locationsearchbar" element={<SearchLocation />} />
       </Routes>
     </div>
   );

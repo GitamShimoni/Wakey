@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import DestinationForm from "./DestinationForm";
+import MainPage from "./MainPage";
 
 const FrontPage = () => {
   const [busInfo, setBusInfo] = useState([]);
@@ -28,6 +29,7 @@ const FrontPage = () => {
   return (
     <div>
       <DestinationForm setFinishedForm={setFinishedForm} />
+      <MainPage />
     </div>
   );
 };
