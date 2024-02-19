@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import DestinationForm from "./DestinationForm";
-import MainPage from "./MainPage";
+import MainPage from "./PlanTrip";
 
 const FrontPage = () => {
   const [busInfo, setBusInfo] = useState([]);

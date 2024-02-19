@@ -14,10 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/apiCheck" element={<API />} />
-        <Route path="/DestinationForm" element={<DestinationForm />} />
-        <Route path="/FrontPage" element={<FrontPage />} />
-        <Route path="/home" element={<MainPage />} />
-        <Route path="/locationsearchbar" element={<SearchLocation />} />
+        <Route path="/homepage" element={<MainPage />} />
       </Routes>
     </div>
   );
