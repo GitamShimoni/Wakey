@@ -7,6 +7,7 @@ import InTripPage from "./InTripPage";
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import Host from "../utils/routes";
 
 
 function MainPage() {
@@ -15,7 +16,7 @@ function MainPage() {
 
   async function isUserSleeping() {
     console.log("Callingggg");
-    const data = await axios.get(`http://localhost:5000/users/isUserSleeping`, {
+    const data = await axios.get(`${Host}/users/isUserSleeping`, {
       headers: {
         token: localStorage.getItem("token"),
       },
