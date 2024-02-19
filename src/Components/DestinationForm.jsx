@@ -89,18 +89,7 @@ const DestinationForm = () => {
       window.location.reload(true);
     }, 1500);
   }
-  //A function that calls the user - with token and voiceType as a header
-  async function callUserWithTwilio() {
-    const data = await axios.get(
-      `http://localhost:5000/phonecall/callToNumber`,
-      {
-        headers: {
-          token: localStorage.getItem("token"),
-          voicetype: userVoiceTypePreference,
-        },
-      }
-    );
-  }
+
   async function changeUserSleepingToFalse() {
     const data = await axios.get(
       `http://localhost:5000/users/changeIsUserSleepingToFalse`,
@@ -124,7 +113,7 @@ const DestinationForm = () => {
   async function fetchBusStationData() {
     try {
       const data = await axios.get(
-        `https://data.gov.il/api/3/action/datastore_search?resource_id=e873e6a2-66c1-494f-a677-f5e77348edb0&q=21669}`
+        `https://data.gov.il/api/3/action/datastore_search?resource_id=e873e6a2-66c1-494f-a677-f5e77348edb0&q=${busSchedule[0]?.MakatDestinationBusstop}}`
         // `https://data.gov.il/api/3/action/datastore_search?resource_id=e873e6a2-66c1-494f-a677-f5e77348edb0&q=${busSchedule[0]?.MakatDestinationBusstop}`
       );
       console.log(data.data.result.records[0], "This is the bus station info");
@@ -145,7 +134,8 @@ const DestinationForm = () => {
           lat: busStationData?.Lat,
           long: busStationData?.Long,
           wakeUpTimer: localStorage.getItem("sliderValue"),
-          wakeUpKillometer: localStorage.getItem("sliderValue"),
+          wakeUpKillometer: null,
+          shilut: localStorage.getItem("BusLineNumber"),
         },
         {
           headers: {
@@ -153,6 +143,7 @@ const DestinationForm = () => {
           },
         }
       );
+      localStorage.setItem("currentTripId", data.data._id);
     } else {
       alert("קרתה בעיה, נא נסה שוב");
     }
