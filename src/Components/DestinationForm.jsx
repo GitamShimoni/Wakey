@@ -4,6 +4,7 @@ import axios from "axios";
 import "./DestinationForm.css";
 import filteredCities from "../Jsons/filteredCities.json";
 import VirtualizedDropdown from "./VirtualizedDropdown";
+import GoToSleepBtn from "./GoToSleepBtn.jsx";
 
 const DestinationForm = ({ setFinishedForm }) => {
   const selectedKey = "CityName";
@@ -195,9 +196,12 @@ const DestinationForm = ({ setFinishedForm }) => {
         placeholderValue={"איזורים בישוב היעד"} //Search Bar Placeholder value
         toSearch={"NAME"} //What should the search bar Search for?
       />
-      <button onClick={() => sendFormFunction()} id="sendformbutton">
+      <div className="GoToSleepBtn">
+        <GoToSleepBtn onClick={() => sendFormFunction()} />
+      </div>
+      {/* <button onClick={() => sendFormFunction()} id="sendformbutton">
         שלח לחיפוש
-      </button>
+      </button> */}
       <p>העיר שנבחרה {selectedOptions.fromCities?.cityName}</p>
       <p>העיר שנבחרה {selectedOptions.lineNumber?.NAME}</p>
       <p>העיר שנבחרה {selectedOptions.cityArea?.NAME}</p>

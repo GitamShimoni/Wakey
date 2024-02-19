@@ -52,9 +52,10 @@ const VirtualizedDropdown = ({
         <ul className="dropdown-list-ul">
           <FixedSizeList
             height={Math.min(200, filteredOptions.length * 35)} // Set the desired height for the virtualized list
-            width={200} // Set the desired width
-            itemSize={35} // Set the height of each list item
+            width={"100%"} // Set the desired width
+            itemSize={30} // Set the height of each list item
             itemCount={filteredOptions.length}
+
           >
             {({ index, style }) => (
               <li
@@ -62,9 +63,13 @@ const VirtualizedDropdown = ({
                 key={index}
                 style={{
                   ...style,
-                  height: "32px",
-                  width: "86%",
-                  marginBottom: "10px",
+                  height: "30px",
+                  width: "100%",
+                  textAlign: "right",
+                  paddingRight: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  boxSizing: "border-box"
                 }}
                 onClick={() => handleSelect(filteredOptions[index])}
               >

@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: "Secular One", sans-serif;
 }
 #sendformbutton{
     width: 20vw;
@@ -16,4 +17,9 @@
 }
 #sendformbutton:hover{
     background-color: rgb(245, 176, 72);
+}
+
+.GoToSleepBtn{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
