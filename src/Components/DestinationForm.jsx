@@ -84,6 +84,39 @@ const DestinationForm = ({ setFinishedForm }) => {
     setBusSchedule(data?.data?.Transitions[0]?.ScheduleList);
     setFinishedForm(true);
   }
+  //A function that calls the user - with token and voiceType as a header
+  async function callUserWithTwilio() {
+    const data = await axios.get(
+      `http://localhost:5000/phonecall/callToNumber`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+          voicetype: userVoiceTypePreference,
+        },
+      }
+    );
+  }
+  async function changeUserSleepingToFalse() {
+    const data = await axios.get(
+      `http://localhost:5000/users/changeIsUserSleepingToFalse`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      }
+    );
+  }
+  async function changeUserSleepingToTrue() {
+    const data = await axios.get(
+      `http://localhost:5000/users/changeIsUserSleepingToTrue`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      }
+    );
+  }
+
   useEffect(() => {
     if (isSelectedArray[0] == true) {
       console.log("TRUE!!!!");
