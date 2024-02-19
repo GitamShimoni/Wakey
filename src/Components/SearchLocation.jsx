@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import VirtualizedDropdownLocation from "./VirtualizedDropDownLocation";
 import GoToSleepBtn from "./GoToSleepBtn";
+import Host from "../utils/routes";
 
 const SearchLocation = () => {
   const [placesList, setPlacesList] = useState([]);
@@ -14,7 +15,7 @@ const SearchLocation = () => {
   };
   async function createNewTrip() {
     const data = await axios.post(
-      "http://localhost:5000/trips/newTrip",
+      `${Host}/trips/newTrip`,
       {
         stopId: "notknown",
         stopName: selectedOption.display_name,
@@ -33,7 +34,7 @@ const SearchLocation = () => {
   }
   async function changeUserSleepingToTrue() {
     const data = await axios.get(
-      `http://localhost:5000/users/changeIsUserSleepingToTrue`,
+      `${Host}/users/changeIsUserSleepingToTrue`,
       {
         headers: {
           token: localStorage.getItem("token"),

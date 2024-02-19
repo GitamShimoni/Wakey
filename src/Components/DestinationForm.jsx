@@ -5,6 +5,7 @@ import "./DestinationForm.css";
 import filteredCities from "../Jsons/filteredCities.json";
 import VirtualizedDropdown from "./VirtualizedDropdown";
 import GoToSleepBtn from "./GoToSleepBtn.jsx";
+import Host from "../utils/routes";
 
 const DestinationForm = () => {
   const selectedKey = "CityName";
@@ -92,7 +93,7 @@ const DestinationForm = () => {
 
   async function changeUserSleepingToFalse() {
     const data = await axios.get(
-      `http://localhost:5000/users/changeIsUserSleepingToFalse`,
+      `${Host}/users/changeIsUserSleepingToFalse`,
       {
         headers: {
           token: localStorage.getItem("token"),
@@ -102,7 +103,7 @@ const DestinationForm = () => {
   }
   async function changeUserSleepingToTrue() {
     const data = await axios.get(
-      `http://localhost:5000/users/changeIsUserSleepingToTrue`,
+      `${Host}/users/changeIsUserSleepingToTrue`,
       {
         headers: {
           token: localStorage.getItem("token"),
@@ -127,7 +128,7 @@ const DestinationForm = () => {
 
     if (busStationData) {
       const data = await axios.post(
-        "http://localhost:5000/trips/newTrip",
+        `${Host}/trips/newTrip`,
         {
           stopId: localStorage.getItem("DestinationBusStopNumber"),
           stopName: localStorage.getItem("DestinationBusStopName"),

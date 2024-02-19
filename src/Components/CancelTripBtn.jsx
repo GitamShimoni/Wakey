@@ -1,9 +1,11 @@
 import React from "react";
 import "./CancelTripBtn.css";
 import axios from "axios";
+import Host from "../utils/routes";
+
 function CancelTripBtn() {
   async function finishLastTrip() {
-    const data = await axios.get(`http://localhost:5000/trips/finishLastTrip`, {
+    const data = await axios.get(`${Host}/trips/finishLastTrip`, {
       headers: {
         token: localStorage.getItem("token"),
       },
@@ -13,7 +15,7 @@ function CancelTripBtn() {
   async function changeUserIsSleeping() {
     if (confirm("האם אתה בטוח רוצה לבטל את הנסיעה?")) {
       const data = await axios.get(
-        `http://localhost:5000/users/changeIsUserSleepingToFalse`,
+        `${Host}/users/changeIsUserSleepingToFalse`,
         {
           headers: {
             token: localStorage.getItem("token"),

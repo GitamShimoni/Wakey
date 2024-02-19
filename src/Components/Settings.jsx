@@ -8,6 +8,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 import logo from "../../public/logo.jpg";
+import Host from "../utils/routes";
+
+
 function Settings() {
   const [userData, setUserData] = useState({});
   const [callingVoice, setCallingVoice] = useState("");
@@ -17,7 +20,7 @@ function Settings() {
   const navigate = useNavigate();
 
   async function changeVoice() {
-    const data = await axios.get(`http://localhost:5000/users/updateVoice`, {
+    const data = await axios.get(`${Host}/users/updateVoice`, {
       headers: {
         token: localStorage.getItem("token"),
         voicetype: voiceSelected,
@@ -46,7 +49,7 @@ function Settings() {
   }, [userData]);
 
   async function getUser() {
-    const data = await axios.get(`http://localhost:5000/users/getUser`, {
+    const data = await axios.get(`${Host}/users/getUser`, {
       headers: {
         token: localStorage.getItem("token"),
       },

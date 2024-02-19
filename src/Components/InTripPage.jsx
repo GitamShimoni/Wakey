@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InTripPopUp from "./InTripPopUp";
 import axios from "axios";
+import Host from "../utils/routes";
 
 const InTripPage = () => {
   //////////// CALC DISTANCE FUNCTION
@@ -68,7 +69,7 @@ const InTripPage = () => {
   //A function that calls the user - with token and voiceType as a header
 
   async function getUserByToken() {
-    const data = await axios.get(`http://localhost:5000/users/getUser`, {
+    const data = await axios.get(`${Host}/users/getUser`, {
       headers: {
         token: localStorage.getItem("token"),
       },
@@ -78,7 +79,7 @@ const InTripPage = () => {
   console.log(userData, "This is the userData");
   async function callUserWithTwilio() {
     const data = await axios.get(
-      `http://localhost:5000/phonecall/callToNumber`,
+      `${Host}/phonecall/callToNumber`,
       {
         headers: {
           token: localStorage.getItem("token"),
@@ -122,7 +123,7 @@ const InTripPage = () => {
   const [currentTrip, setCurrentTrip] = useState([]);
 
   async function getTripById() {
-    const data = await axios.get(`http://localhost:5000/trips/getTripById`, {
+    const data = await axios.get(`${Host}/trips/getTripById`, {
       headers: {
         token: localStorage.getItem("token"),
         tripid: localStorage.getItem("currentTripId"),
