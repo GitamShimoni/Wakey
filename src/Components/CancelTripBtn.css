@@ -1,0 +1,60 @@
+.custom-button {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #cc0000;
+    background-color: #e50000;
+    overflow: hidden;
+    transition: all 0.3s;
+    justify-content: flex-end;
+  }
+  
+  .custom-button, .custom-button__icon, .custom-button__text {
+    transition: all 0.3s;
+  }
+  
+  .custom-button .custom-button__text {
+    transform: translateX(35px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .custom-button .custom-button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #cc0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-button .custom-svg {
+    width: 20px;
+  }
+  
+  .custom-button:hover {
+    background: #cc0000;
+  }
+  
+  .custom-button:hover .custom-button__text {
+    color: transparent;
+  }
+  
+  .custom-button:hover .custom-button__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .custom-button:active .custom-button__icon {
+    background-color: #b20000;
+  }
+  
+  .custom-button:active {
+    border: 1px solid #b20000;
+  }
+  

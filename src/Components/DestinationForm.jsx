@@ -202,11 +202,7 @@ const DestinationForm = ({ setFinishedForm }) => {
       {/* <button onClick={() => sendFormFunction()} id="sendformbutton">
         שלח לחיפוש
       </button> */}
-      <p>העיר שנבחרה {selectedOptions.fromCities?.cityName}</p>
-      <p>העיר שנבחרה {selectedOptions.lineNumber?.NAME}</p>
-      <p>העיר שנבחרה {selectedOptions.cityArea?.NAME}</p>
-      <p>העיר שנבחרה {selectedOptions.yaadCities?.NAME}</p>
-      <p>העיר שנבחרה {selectedOptions.yaadPlaces?.NAME}</p>
+    
     </div>
   );
 };
