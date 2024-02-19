@@ -28,8 +28,10 @@
 .wakey-logo {
   width: 200px;
   height: auto;
+  margin-bottom: 20px;
 }
 
-#in-trip-title {
+.in-trip-title {
   text-align: center;
+  margin-bottom: 15px;
 }

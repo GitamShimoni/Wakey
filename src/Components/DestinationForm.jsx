@@ -18,6 +18,7 @@ const DestinationForm = () => {
   const [busSchedule, setBusSchedule] = useState([]);
   const [filteredBusSchedule, setFilteredBusSchedule] = useState([]);
   const [DestinationBusStopNumber, setDestinationBusStopNumber] = useState("");
+  const [isError, setIsError] = useState("noerror");
 
   function toggleIsSelectedArray(searchbarId, isTrue) {
     const tempIsSelectedArray = [...isSelectedArray];
@@ -84,10 +85,17 @@ const DestinationForm = () => {
     );
     setBusSchedule(data?.data?.Transitions[0]?.ScheduleList);
     createNewTrip();
-    changeUserSleepingToTrue();
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 1500);
+    if (isError != "error") {
+      console.log("GOT INTO THE IF!");
+      changeUserSleepingToTrue();
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1500);
+    }
   }
 
   async function changeUserSleepingToFalse() {
@@ -146,6 +154,7 @@ const DestinationForm = () => {
       localStorage.setItem("currentTripId", data.data._id);
     } else {
       alert("קרתה בעיה, נא נסה שוב");
+      setIsError("error");
     }
   }
 
