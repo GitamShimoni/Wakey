@@ -1,10 +1,10 @@
 import React from "react";
-import "./GoToSleepBtn.css"
-function GoToSleepBtn() {
+import "./GoToSleepBtn.css";
+function GoToSleepBtn({ sendFormFunction }) {
   return (
-    <button className="cssbuttons-io-button">
+    <button onClick={() => sendFormFunction()} className="cssbuttons-io-button">
       לך לישון{" "}
-      <div class="icon">
+      <div className="icon">
         <svg
           height="24"
           width="24"

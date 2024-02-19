@@ -6,7 +6,7 @@ import filteredCities from "../Jsons/filteredCities.json";
 import VirtualizedDropdown from "./VirtualizedDropdown";
 import GoToSleepBtn from "./GoToSleepBtn.jsx";
 
-const DestinationForm = ({ setFinishedForm }) => {
+const DestinationForm = () => {
   const selectedKey = "CityName";
   const [selectedOptions, setSelectedOptions] = useState({});
   const [isSelectedArray, setIsSelectedArray] = useState([]);
@@ -17,6 +17,7 @@ const DestinationForm = ({ setFinishedForm }) => {
   const [yaadPlaces, setYaadPlaces] = useState([]);
   const [busSchedule, setBusSchedule] = useState([]);
   const [filteredBusSchedule, setFilteredBusSchedule] = useState([]);
+  const [DestinationBusStopNumber, setDestinationBusStopNumber] = useState("");
 
   function toggleIsSelectedArray(searchbarId, isTrue) {
     const tempIsSelectedArray = [...isSelectedArray];
@@ -82,7 +83,11 @@ const DestinationForm = ({ setFinishedForm }) => {
       "THIS IS THE OVERALL SCHEDULEEEEEEEEEEEEEEEEEEEE"
     );
     setBusSchedule(data?.data?.Transitions[0]?.ScheduleList);
-    setFinishedForm(true);
+    createNewTrip();
+    changeUserSleepingToTrue();
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 1500);
   }
   //A function that calls the user - with token and voiceType as a header
   async function callUserWithTwilio() {
@@ -116,30 +121,59 @@ const DestinationForm = ({ setFinishedForm }) => {
       }
     );
   }
+  async function fetchBusStationData() {
+    try {
+      const data = await axios.get(
+        `https://data.gov.il/api/3/action/datastore_search?resource_id=e873e6a2-66c1-494f-a677-f5e77348edb0&q=21669}`
+        // `https://data.gov.il/api/3/action/datastore_search?resource_id=e873e6a2-66c1-494f-a677-f5e77348edb0&q=${busSchedule[0]?.MakatDestinationBusstop}`
+      );
+      console.log(data.data.result.records[0], "This is the bus station info");
+      return data?.data?.result?.records[0];
+    } catch {
+      console.log("Failed to fetch bus station");
+    }
+  }
+  async function createNewTrip() {
+    const busStationData = await fetchBusStationData();
+
+    if (busStationData) {
+      const data = await axios.post(
+        "http://localhost:5000/trips/newTrip",
+        {
+          stopId: localStorage.getItem("DestinationBusStopNumber"),
+          stopName: localStorage.getItem("DestinationBusStopName"),
+          lat: busStationData?.Lat,
+          long: busStationData?.Long,
+          wakeUpTimer: localStorage.getItem("sliderValue"),
+          wakeUpKillometer: localStorage.getItem("sliderValue"),
+        },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+    } else {
+      alert("קרתה בעיה, נא נסה שוב");
+    }
+  }
 
   useEffect(() => {
     if (isSelectedArray[0] == true) {
-      console.log("TRUE!!!!");
       getBusLinesByCity();
       toggleIsSelectedArray(0, false);
     }
     if (isSelectedArray[1] == true) {
-      console.log("TRUE!!!!");
       getPlacesList();
       toggleIsSelectedArray(1, false);
-      console.log(selectedOptions, "These are the ssssssssssssss");
     }
     if (isSelectedArray[2] == true) {
-      console.log("TRUE!!!!");
       getYaadCitiesList();
       toggleIsSelectedArray(2, false);
-      console.log(selectedOptions, "These are the ssssssssssssss");
     }
     if (isSelectedArray[3] == true) {
-      console.log("TRUE!!!!");
       getYaadPlacesList();
       toggleIsSelectedArray(3, false);
-      console.log(selectedOptions, "These are the ssssssssssssss");
     }
   }, [selectedOptions, isSelectedArray, lineNumbers]);
 
@@ -159,6 +193,7 @@ const DestinationForm = ({ setFinishedForm }) => {
         "DestinationBusStopNumber",
         busSchedule[0]?.MakatDestinationBusstop
       );
+      localStorage.setItem("DestinationBusStopName", busSchedule[0]?.Name);
       localStorage.setItem("BusLineNumber", busSchedule[0]?.Shilut);
       const currentDate = new Date();
       const tempFilteredSchedule = busSchedule.filter((schedule) =>
@@ -169,6 +204,10 @@ const DestinationForm = ({ setFinishedForm }) => {
         )
       );
       setFilteredBusSchedule(tempFilteredSchedule);
+      localStorage.setItem(
+        "filteredSchedule",
+        JSON.stringify(tempFilteredSchedule)
+      );
       console.log(filteredBusSchedule, "This is the filtered bus schedule");
     }
   }, [busSchedule]);
@@ -177,14 +216,6 @@ const DestinationForm = ({ setFinishedForm }) => {
     <div id="destination-form-container">
       <h1>רשימת הערים</h1>
       <h3>חפש ישוב מוצא</h3>
-      {/* <DropDownList
-        searchbarId={0}
-        searchbarName={"fromCities"}
-        options={cities} //The data passed to the component
-        onSelect={handleSelect}
-        placeholderValue={"חפש ערים"} //Search Bar Placeholder value
-        toSearch={"cityName"} //What should the search bar Search for?
-      /> */}
       <VirtualizedDropdown
         searchbarId={0}
         searchbarName={"fromCities"}
@@ -230,12 +261,8 @@ const DestinationForm = ({ setFinishedForm }) => {
         toSearch={"NAME"} //What should the search bar Search for?
       />
       <div className="GoToSleepBtn">
-        <GoToSleepBtn onClick={() => sendFormFunction()} />
+        <GoToSleepBtn sendFormFunction={sendFormFunction} />
       </div>
-      {/* <button onClick={() => sendFormFunction()} id="sendformbutton">
-        שלח לחיפוש
-      </button> */}
-    
     </div>
   );
 };

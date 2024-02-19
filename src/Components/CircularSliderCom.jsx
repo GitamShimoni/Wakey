@@ -7,37 +7,39 @@ function CircularSliderCom({
   knobColor,
   position,
   method,
-  label
+  label,
 }) {
   const [trackSize, setTrackSize] = useState(24);
-
   function handleChange(value) {
     setTrackSize(20 + value);
+    localStorage.setItem("sliderValue", value);
   }
 
   return (
     <div className="CircularSlider-container">
-      <CircularSlider
-        onChange={(value) => {
-          handleChange(value);
-          console.log(value);
-        }}
-        max={20}
-        min={2}
-        label={label}
-        labelColor="#005a58"
-        labelFontSize	="2rem"
-        labelBottom = {true}
-        knobColor={knobColor}
-        knobSize={30+trackSize}
-        progressColorFrom={progressColorFrom}
-        progressColorTo={progressColorTo}
-        progressSize={trackSize - 4}
-        trackColor="#FFFFFF"
-        trackSize={trackSize}
-        dataIndex={3}
-        valueFontSize="2.5rem"
-      />
+      {trackSize && (
+        <CircularSlider
+          onChange={(value) => {
+            handleChange(value);
+            console.log(value);
+          }}
+          max={20}
+          min={2}
+          label={label}
+          labelColor="#005a58"
+          labelFontSize="2rem"
+          labelBottom={true}
+          knobColor={knobColor}
+          knobSize={30 + trackSize}
+          progressColorFrom={progressColorFrom}
+          progressColorTo={progressColorTo}
+          progressSize={trackSize - 4}
+          trackColor="#FFFFFF"
+          trackSize={trackSize}
+          dataIndex={3}
+          valueFontSize="2.5rem"
+        />
+      )}
       {method === 2 && (
         <iframe
           className="map"
