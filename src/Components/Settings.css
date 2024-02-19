@@ -1,0 +1,107 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #fee4c1;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+    align-items: center;
+}
+
+.user-info-span {
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  font-size: large
+}
+
+.user-info-section {
+  background-color: #ff7e53;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+#voice-select {
+  width: 80px;
+}
+
+#voice-select {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-top: 8px;
+}
+
+.voice-option {
+  padding: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Selected option style */
+#voice-select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+.save-voice-btn {
+  width: 80px;
+  padding: 5px;
+  margin-top: 10px;
+  font-family: "Secular One", sans-serif;
+  font-size: large;
+  background-color: #fee4c1;
+  cursor: pointer;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+}
+.save-voice-btn:hover {
+  background-color: #ffd6a0;
+}
+.home-btn {
+  display: flex;
+  padding: 10px;
+  border-style: solid;
+  width: fit-content;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 66px);
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  background-color: lightgray;
+}
+
+.settings-logo {
+  width: 80%;
+  max-width: 350px;
+}
+
+.save-btn-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voice-change-div{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
