@@ -15,6 +15,7 @@ const InTripPage = () => {
   const [busStopId, setBusStopId] = useState("");
   const [busStopNum, setBusStopNum] = useState("");
   const [busStopData, setBusStopData] = useState([]);
+  const [currentTrip, setCurrentTrip] = useState([]);
 
   useEffect(() => {
     // Function to get user's current location
@@ -76,6 +77,7 @@ const InTripPage = () => {
     });
     setUserData(data.data);
   }
+
   console.log(userData, "This is the userData");
   async function callUserWithTwilio() {
     const data = await axios.get(
@@ -89,6 +91,8 @@ const InTripPage = () => {
     );
   }
   console.log(distance, reqWakeUp, "DISTANCE AND WAKE UP");
+
+  //THIS IS THE USE EFFECT THAT CALLS THE USER - USING TWILIO FUNCTION
   useEffect(() => {
     if (distance <= reqWakeUp && reqWakeUp != null) {
       console.log(distance, "GOT INTO THE IF");
@@ -120,23 +124,22 @@ const InTripPage = () => {
   };
   //////////////////////////////////////////////////// CALC DISTANCE FUNCTION
 
-  const [currentTrip, setCurrentTrip] = useState([]);
 
-  async function getTripById() {
-    const data = await axios.get(`${Host}/trips/getTripById`, {
+  async function getCurrentTrip() {
+    const data = await axios.get(`${Host}/trips/getLastTrip`, {
       headers: {
         token: localStorage.getItem("token"),
-        tripid: localStorage.getItem("currentTripId"),
       },
     });
+    setCurrentTrip(data.data);
+
+    //Got the trip and set the data
     const destination = {
       latitude: data?.data?.destination?.lat,
       longitude: data?.data?.destination?.long,
     };
-    console.log(
-      data?.data?.destination?.wakeUpTimer,
-      "@#$*(#@$&@#($@&#*$#@&$@*$&#@*"
-    );
+
+    //Check if you should wake up by killometer or timer.
     if (data?.data?.wakeUpTimer != null) {
       setIsKillometer(false);
       setReqWakeUp(data?.data?.wakeUpTimer);
@@ -144,15 +147,26 @@ const InTripPage = () => {
       setIsKillometer(true);
       setReqWakeUp(data?.data?.wakeUpKillometer);
     }
+
+    //Set the busStopId, set the target landmark (landmark2)
     setBusStopId(data?.data?.destination.stopId);
     setLandMark2(destination);
-    setCurrentTrip(data.data);
   }
+
+  async function getUserByToken() {
+    const data = await axios.get(`http://localhost:5000/users/getUser`, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    setUserData(data.data);
+  }
+
   console.log(reqWakeUp, "Thishdalshljdahsjdasjdhsajda");
   console.log(currentTrip);
   console.log(landmark2);
   useEffect(() => {
-    getTripById();
+    getCurrentTrip();
     getUserByToken();
   }, []);
   return (
