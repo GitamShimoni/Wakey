@@ -4,7 +4,7 @@ import CircularSliderCom from "./CircularSliderCom";
 import DestinationForm from "./DestinationForm";
 import SearchLocation from "./SearchLocation";
 import "animate.css";
-import InTrip from "./InTrip";
+import InTrip from "./InTripPopUp";
 import axios from "axios";
 
 function PlanTrip() {

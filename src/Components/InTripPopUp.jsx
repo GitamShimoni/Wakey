@@ -4,7 +4,7 @@ import Logo from "../../public/logo2.png";
 import AlarmOnIcon from "@mui/icons-material/AlarmOn";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import CancelTripBtn from "./CancelTripBtn";
-function InTrip() {
+function InTripPopUp() {
   return (
     <div className="InTrip-container">
       <img className="wakey-logo" src={Logo} alt="logo" />
@@ -24,4 +24,4 @@ function InTrip() {
   );
 }
 
-export default InTrip;
+export default InTripPopUp;

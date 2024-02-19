@@ -22,4 +22,8 @@
 .GoToSleepBtn{
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

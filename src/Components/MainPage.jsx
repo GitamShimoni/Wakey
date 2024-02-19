@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MainPage.css";
 import "animate.css";
-import InTrip from "./InTrip";
 import axios from "axios";
 import PlanTrip from "./PlanTrip";
+import InTripPage from "./InTripPage";
 
 function MainPage() {
   const [isUserSleepingBool, setIsUserSleepingBool] = useState(false);
@@ -25,7 +25,7 @@ function MainPage() {
 
   return (
     <div id="mainPage-container">
-      {isUserSleepingBool ? <InTrip /> : <PlanTrip />}
+      {isUserSleepingBool ? <InTripPage /> : <PlanTrip />}
     </div>
   );
 }
