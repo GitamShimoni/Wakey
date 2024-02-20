@@ -2,21 +2,21 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #fee4c1;
   align-items: center;
 }
 
 .user-info {
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 
 .user-info-span {
   margin-right: 5px;
   margin-left: 5px;
   margin-bottom: 5px;
-  font-size: large
+  font-size: large;
 }
 
 .user-info-section {
@@ -78,10 +78,8 @@
   border-style: solid;
   width: fit-content;
   border-radius: 5px;
-  position: absolute;
-  bottom: 10px;
-  left: calc(50% - 66px);
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .home-btn:hover {
@@ -93,14 +91,14 @@
   max-width: 350px;
 }
 
-.save-btn-container{
+.save-btn-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.voice-change-div{
+.voice-change-div {
   display: flex;
   align-items: center;
   width: 100%;

@@ -184,3 +184,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+.simple-loader {
+  text-align: center;
+  padding: 10px;
+}
