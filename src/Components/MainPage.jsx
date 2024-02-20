@@ -4,11 +4,11 @@ import "animate.css";
 import axios from "axios";
 import PlanTrip from "./PlanTrip";
 import InTripPage from "./InTripPage";
-import SettingsIcon from '@mui/icons-material/Settings';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
 import Host from "../utils/routes";
-
+import NameIcon from "../../public/name-logo.png";
 
 function MainPage() {
   const [isUserSleepingBool, setIsUserSleepingBool] = useState(false);
@@ -31,12 +31,14 @@ function MainPage() {
 
   return (
     <div id="mainPage-container">
+    <img className="name-logo" src={NameIcon} alt="ad matai" />
 
       {isUserSleepingBool ? <InTripPage /> : <PlanTrip />}
-      <div className="settings-btn" onClick={()=> navigate("/settings")}><AccountCircleIcon/></div>
+      <div className="settings-btn" onClick={() => navigate("/settings")}>
+        <AccountCircleIcon />
+      </div>
     </div>
   );
-
 }
 
 export default MainPage;

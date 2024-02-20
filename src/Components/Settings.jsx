@@ -115,11 +115,11 @@ function Settings() {
           </div>
         </div>
 
+      </div>
         <div className="home-btn" onClick={() => navigate("/homepage")}>
           {" "}
           <HomeIcon /> לעמוד הבית
         </div>
-      </div>
     </div>
   );
 }

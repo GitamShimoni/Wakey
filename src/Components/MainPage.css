@@ -99,3 +99,10 @@
   content: "החשבון שלי ";
   transition: 0.6s;
 }
+
+.name-logo{
+  width: 250px;
+  height: auto;
+  margin-top: 10px;
+}
+

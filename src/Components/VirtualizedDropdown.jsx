@@ -13,20 +13,24 @@ const VirtualizedDropdown = ({
   toSearch,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [filteredOptions, setFilteredOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Filter options based on search term
     if (options) {
-      const filtered = options?.filter((option) =>
+      setIsLoading(true);
+      const filtered = options.filter((option) =>
         option[toSearch].toLowerCase().includes(searchTerm.toLowerCase())
       );
-      // setFilteredOptions(filtered.slice(0, 20));
-      setFilteredOptions(filtered);
+      setTimeout(() => {
+        setFilteredOptions(filtered);
+        setIsLoading(false);
+      }, 1000); // Simulating loading time with setTimeout
     }
-  }, [searchTerm, options]);
+  }, [searchTerm, options, toSearch]);
 
   const handleSelect = (option) => {
     onSelect(option, searchbarName, searchbarId);
@@ -48,38 +52,40 @@ const VirtualizedDropdown = ({
         onClick={toggleDropdown}
         placeholder={selected ? selected : placeholderValue}
       />
-      {isOpen && filteredOptions?.length > 0 && (
+      {isOpen && (
         <ul className="dropdown-list-ul">
-          <FixedSizeList
-            height={Math.min(200, filteredOptions.length * 35)} // Set the desired height for the virtualized list
-            width={"100%"} // Set the desired width
-            itemSize={30} // Set the height of each list item
-            itemCount={filteredOptions.length}
-
-          >
-            {({ index, style }) => (
-              <li
-                className="dropdown-list-li"
-                key={index}
-                style={{
-                  ...style,
-                  height: "30px",
-                  width: "100%",
-                  textAlign: "right",
-                  paddingRight: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  boxSizing: "border-box"
-                }}
-                onClick={() => handleSelect(filteredOptions[index])}
-              >
-                <ListItemText
-                  className="listItemInSearchbar"
-                  primary={filteredOptions[index][toSearch]}
-                />
-              </li>
-            )}
-          </FixedSizeList>
+          {isLoading && <div className="simple-loader">טוען...</div>}
+          {!isLoading && filteredOptions.length > 0 && (
+            <FixedSizeList
+              height={Math.min(200, filteredOptions.length * 35)}
+              width={"100%"}
+              itemSize={30}
+              itemCount={filteredOptions.length}
+            >
+              {({ index, style }) => (
+                <li
+                  className="dropdown-list-li"
+                  key={index}
+                  style={{
+                    ...style,
+                    height: "30px",
+                    width: "100%",
+                    textAlign: "right",
+                    paddingRight: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    boxSizing: "border-box"
+                  }}
+                  onClick={() => handleSelect(filteredOptions[index])}
+                >
+                  <ListItemText
+                    className="listItemInSearchbar"
+                    primary={filteredOptions[index][toSearch]}
+                  />
+                </li>
+              )}
+            </FixedSizeList>
+          )}
         </ul>
       )}
     </div>

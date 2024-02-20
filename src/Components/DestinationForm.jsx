@@ -8,6 +8,7 @@ import GoToSleepBtn from "./GoToSleepBtn.jsx";
 import Host from "../utils/routes";
 
 const DestinationForm = () => {
+  localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2M4YmMyNDM2NWFmMmMyMGIwMGJlMiIsImlhdCI6MTcwODMzNjA2N30.j5QZGpVBTv3EDVAlpiPQbrdgSjBrdiYFxnpevdtsCyk")
   const selectedKey = "CityName";
   const [selectedOptions, setSelectedOptions] = useState({});
   const [isSelectedArray, setIsSelectedArray] = useState([]);
