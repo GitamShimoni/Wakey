@@ -150,7 +150,7 @@ const InTripPage = () => {
   }
 
   async function getUserByToken() {
-    const data = await axios.get(`http://localhost:5000/users/getUser`, {
+    const data = await axios.get(`${Host}/users/getUser`, {
       headers: {
         token: localStorage.getItem("token"),
       },
