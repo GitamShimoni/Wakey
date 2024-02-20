@@ -80,15 +80,12 @@ const InTripPage = () => {
 
   console.log(userData, "This is the userData");
   async function callUserWithTwilio() {
-    const data = await axios.get(
-      `${Host}/phonecall/callToNumber`,
-      {
-        headers: {
-          token: localStorage.getItem("token"),
-          voicetype: userData.voiceType,
-        },
-      }
-    );
+    const data = await axios.get(`${Host}/phonecall/callToNumber`, {
+      headers: {
+        token: localStorage.getItem("token"),
+        voicetype: userData.voiceType,
+      },
+    });
   }
   console.log(distance, reqWakeUp, "DISTANCE AND WAKE UP");
 
@@ -96,7 +93,7 @@ const InTripPage = () => {
   useEffect(() => {
     if (distance <= reqWakeUp && reqWakeUp != null) {
       console.log(distance, "GOT INTO THE IF");
-      callUserWithTwilio();
+      // callUserWithTwilio();
     }
   }, [distance]);
 
@@ -123,7 +120,6 @@ const InTripPage = () => {
     return angle * (Math.PI / 180);
   };
   //////////////////////////////////////////////////// CALC DISTANCE FUNCTION
-
 
   async function getCurrentTrip() {
     const data = await axios.get(`${Host}/trips/getLastTrip`, {
@@ -154,7 +150,7 @@ const InTripPage = () => {
   }
 
   async function getUserByToken() {
-    const data = await axios.get(`http://localhost:5000/users/getUser`, {
+    const data = await axios.get(`${Host}/users/getUser`, {
       headers: {
         token: localStorage.getItem("token"),
       },
