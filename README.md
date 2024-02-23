@@ -6,7 +6,7 @@ Leveraging GPS technology and government APIs, our platform accomplishes its pri
 
 # Backend Side - https://github.com/GitamShimoni/Wakey-backend
 
-================================================================================================
+==========================================================================================
 
 Key Features:
 Intuitive Design: Easy-to-navigate interface for a hassle-free experience.
