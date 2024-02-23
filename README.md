@@ -6,13 +6,13 @@ Leveraging GPS technology and government APIs, our platform accomplishes its pri
 
 # Backend Side - https://github.com/GitamShimoni/Wakey-backend
 
-==========================================================================================
+==========================================================================
 
 Key Features:
-Intuitive Design: Easy-to-navigate interface for a hassle-free experience.
-Precise Timing: Wake-up calls are synchronized with your public transportation arrival time using real-time data.
-Reliable GPS Integration: Accurate location tracking ensures timely alerts.
-Government APIs: Utilizes official data sources for enhanced reliability.
+* Intuitive Design: Easy-to-navigate interface for a hassle-free experience.
+* Precise Timing: Wake-up calls are synchronized with your public transportation arrival time using real-time data.
+* Reliable GPS Integration: Accurate location tracking ensures timely alerts.
+* Government APIs: Utilizes official data sources for enhanced reliability.
 
 
 Wake up confidently with Wakey—your reliable travel companion for stress-free commuting!
