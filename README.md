@@ -1,6 +1,18 @@
-# Wakey
+# Wakey: Public Transportation Wake-Up Assistant - Frontend side
 
-Wakey is a free web-app that helps users wake up before arriving at their public transportation destination.
-Wakey has an easy-to-use and intuitive design, friendly for all users, and free to use.
+Wakey is a free-to-use web application designed to assist users in waking up before reaching their public transportation destination.
+With an intuitive and user-friendly interface, Wakey ensures a seamless experience for all users.
+Leveraging GPS technology and government APIs, our platform accomplishes its primary goal: making timely phone calls to wake users up just before they arrive at their designated location.
 
-Our platform uses GPS and several government api's to achieve its goal - Making a phone call, and waking up its user, before arriving at the designated location.
+# Backend Side - https://github.com/GitamShimoni/Wakey-backend
+
+================================================================================================
+
+Key Features:
+Intuitive Design: Easy-to-navigate interface for a hassle-free experience.
+Precise Timing: Wake-up calls are synchronized with your public transportation arrival time using real-time data.
+Reliable GPS Integration: Accurate location tracking ensures timely alerts.
+Government APIs: Utilizes official data sources for enhanced reliability.
+
+
+Wake up confidently with Wakey—your reliable travel companion for stress-free commuting!
